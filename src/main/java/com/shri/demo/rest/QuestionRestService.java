@@ -22,7 +22,16 @@ public class QuestionRestService {
 
     //TODO call the service facade insted of calling repo directly.
 
-    @PostMapping(value = "/", consumes ="application/json")
+    /*
+    url - http://localhost:8888/question/
+        {
+            "id": 2,
+            "title": "what multivitamin should i take",
+            "text": "what nature based multivitamin you recommend",
+            "user": "shri"
+        }
+     */
+    @PostMapping(value = "/", consumes = "application/json")
     public Question insert(@RequestBody Question question) {
         return questionRepo.save(question);
     }
@@ -32,9 +41,13 @@ public class QuestionRestService {
 //        return questionRepo.;
 //    }
 
-    @GetMapping(value = "/_search/title/{text}")
-    public List<Question> searchByTitle(@PathVariable final String text) {
-        return questionRepo.findByTitle(text);
+    /*
+    url - http://localhost:8888/question/_search/title/what
+
+     */
+    @GetMapping(value = "/_search/title/{title}")
+    public List<Question> searchByTitle(@PathVariable final String title) {
+        return questionRepo.findByTitle(title);
     }
 
 
@@ -50,7 +63,7 @@ public class QuestionRestService {
     }
 
 
-    @GetMapping(value = "/_search/all")
+    @GetMapping(value = "/")
     public List<Question> searchAll() {
         List<Question> usersList = new ArrayList<>();
         Iterable<Question> userses = questionRepo.findAll();
