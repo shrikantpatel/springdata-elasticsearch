@@ -1,0 +1,51 @@
+{
+  "aliases": {},
+  "mappings": {
+    "question": {
+      "properties": {
+        "id": {
+          "type": "long"
+        },
+        "text": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "title": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "user": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        }
+      }
+    }
+  },
+  "settings": {
+    "index": {
+      "creation_date": "1523207636746",
+      "number_of_shards": "5",
+      "number_of_replicas": "1",
+      "uuid": "GDk5c61CQhK9igkwmaHrQA",
+      "version": {
+        "created": "6020299"
+      },
+      "provided_name": "question"
+    }
+  }
+}

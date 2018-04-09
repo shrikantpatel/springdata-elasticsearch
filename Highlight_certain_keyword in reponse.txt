@@ -1,0 +1,76 @@
+/*************** highlight certain keyword in response. /**************
+
+Input -
+
+curl -Xget "http://localhost:9200/question/_search" -H 'Content-Type: application/json' -d'
+{
+  "query": {
+    "match": {
+      "title.english": "multivitamin"
+    }
+  },
+  "highlight": {
+    "fields": {
+      "title": {
+        "highlight_query": {
+          "bool": {
+            "must": {
+              "match": {
+                "title": "multivitamin"
+              }
+            },
+            "minimum_should_match": 0
+          }
+        }
+      }
+    }
+  }
+}'
+
+Output
+
+{
+  "took": 2,
+  "timed_out": false,
+  "_shards": {
+    "total": 5,
+    "successful": 5,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": 2,
+    "max_score": 0.2876821,
+    "hits": [
+      {
+        "_index": "question",
+        "_type": "question",
+        "_id": "2",
+        "_score": 0.2876821,
+        "_source": {
+          "id": 2,
+          "title": "which multivitamin's shouldn't i take",
+          "text": "which nature based multivitamin you recommend",
+          "user": "shri patel"
+        }
+      },
+      {
+        "_index": "question",
+        "_type": "question",
+        "_id": "1",
+        "_score": 0.2876821,
+        "_source": {
+          "id": 1,
+          "title": "Which multivitamin should i take",
+          "text": "Which nature based multivitamin you recommend",
+          "user": "shri"
+        },
+        "highlight": {
+          "title": [
+            "Which <em>multivitamin</em> should i take"
+          ]
+        }
+      }
+    ]
+  }
+}
