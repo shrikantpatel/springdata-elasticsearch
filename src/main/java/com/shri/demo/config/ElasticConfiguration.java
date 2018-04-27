@@ -34,6 +34,13 @@ public class ElasticConfiguration {
                 .build();
 
         //https://www.elastic.co/guide/en/elasticsearch/guide/current/_transport_client_versus_node_client.html
+        /* previous version spring data elastic 2.x
+        return TransportClient.builder()
+                .settings(esSettings)
+                .build()
+                .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(EsHost), EsPort));
+
+        */
         return new PreBuiltTransportClient(esSettings).addTransportAddress(
                 new InetSocketTransportAddress(InetAddress.getByName(EsHost), EsPort));
     }
